@@ -11,7 +11,7 @@
 // You must use two .then functions to handle the response object.
 // Chain these functions off of $http (do not put them in variables)
 // The response object will look like this :
-/* 
+/*
     {
       data: [
         {
@@ -40,12 +40,23 @@ function noWeakLink() {
   var promise = $http({
     method: 'GET',
     url: '/api/users'
-  })
-  // CODE HERE...
+  }).then(function(fulfilled) {
+    firstUser = fulfilled.data[0];
+    // console.log(firstUser);
+    thirdUser = fulfilled.data[2];
+    // console.log(thirdUser, fulfilled.data[9]);
+    return fulfilled.data[9];
+})
+
+  console.log(firstUser);
+  console.log(thirdUser);
+
+    return   promise;
+  }
 
 
-  return promise;
-}
+
+
 
 
 
@@ -74,6 +85,7 @@ function large() {
 }
 // CODE HERE...
 
+var boundToElephant = large.bind(elephant);
 
 
 // *************
@@ -87,6 +99,9 @@ function large() {
 
 // CODE HERE...
 
+function deathStar(capacity,crew) {
+    return capacity.bind(crew);
+}
 
 
 // *************
@@ -102,6 +117,12 @@ function large() {
 
 // CODE HERE...
 
+function accountingOffice(assets) {
+  return function(liabilities) {
+        var total = assets + liabilities;
+        return total;
+  }
+}
 
 
 // *************
@@ -126,6 +147,20 @@ function large() {
 // };
 
 // CODE HERE...
+
+function forgetter(name) {
+
+  var allItems = [];
+
+return function rememberall(item){
+    allItems.push(item);
+    return {
+      name: name,
+      remember: allItems
+      }
+    }
+
+}
 
 
 
@@ -154,3 +189,48 @@ function large() {
 // NOTE: Neither hunger nor danger should be able to exceed 100 or drop below 0.
 
 // CODE HERE...
+
+
+function frodo(startingHungerValue,startingDangerValue) {
+  var hunger = startingHungerValue;
+  var danger = startingDangerValue;
+
+  function dinnerOverFire() {
+        if (hunger < 25) {
+          hunger = 0;
+        } else {
+        hunger -= 25;
+        }
+        if (danger > 60) {
+          danger = 100;
+        } else {
+          danger += 40;
+        }
+        return {
+          hunger: hunger,
+          danger: danger
+        }
+  };
+
+  function hidingInBush() {
+        if (hunger > 75) {
+          hunger = 100;
+        } else {
+          hunger += 35;
+        }
+        if (danger < 20) {
+          danger = 0;
+        } else {
+          danger -= 20;
+        }
+        return {
+              hunger: hunger,
+              danger: danger
+            }
+    };
+  return {
+    dinnerOverFire: dinnerOverFire,
+    hidingInBush: hidingInBush
+  }
+
+}

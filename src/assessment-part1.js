@@ -43,27 +43,27 @@ function daBears(){
 // Which function(s) access the "chair" variable and get "Too Big!"
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale1 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+var fairyTale1 = ["papaBear", "mamaBear"];
 
 // Which function(s) access the "feeling" variable and get "Hungry"
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale2 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+var fairyTale2 = ["goldilocks"];
 
 // Which function(s) access the "porridge" variable and get "Too Cold!"
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale3 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+var fairyTale3 = [ "mamaBear"];
 
 // Which function(s) access the "sleepy" variable and get undefined
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale4 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+var fairyTale4 = ["daBears", "papaBear", "mamaBear", "goldilocks"];
 
 // Which function(s) access the isFurry variable and get true
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear"];
 
 
 // *************
@@ -83,7 +83,20 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 
 // CODE HERE...
 
+function Vehicle() {
+  this.gasRemaining = 100;
+}
 
+Vehicle.prototype.drive = function() {
+  this.gasRemaining -= 25;
+}
+
+var charger = new Vehicle();
+var mustang = new Vehicle();
+
+charger.drive();
+mustang.drive();
+mustang.drive();
 
 
 
@@ -110,6 +123,15 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 // CODE HERE...
 
 
+String.prototype.grammarPolice = function() {
+  var arr = this.split(' ');
+  for (var i in arr) {
+    arr[i] = arr[i][0].toUpperCase() + arr[i].slice(1).toLowerCase();
+      console.log(arr[i]);
+  }
+  return arr.join(" ");
+}
+
 
 // *************
 // * PROBLEM 4 *
@@ -127,7 +149,15 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 
 // CODE HERE...
 
-
+function valueType(a,b) {
+  if (a === b) {
+    return "Exactly the same"
+  } else if (a == b && typeof a !== typeof b) {
+    return "Same value, different types"
+  } else {
+    return "Different values"
+  }
+}
 
 // *************
 // * PROBLEM 5 *
@@ -141,3 +171,10 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 var theAnswer = "Unknown";
 
 // CODE HERE...
+
+function promiseCatcher(promise) {
+  promise.then(function(answer) {
+      theAnswer = answer;
+      return theAnswer;
+    })
+}
