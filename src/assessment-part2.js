@@ -42,15 +42,9 @@ function noWeakLink() {
     url: '/api/users'
   }).then(function(fulfilled) {
     firstUser = fulfilled.data[0];
-    // console.log(firstUser);
     thirdUser = fulfilled.data[2];
-    // console.log(thirdUser, fulfilled.data[9]);
     return fulfilled.data[9];
 })
-
-  console.log(firstUser);
-  console.log(thirdUser);
-
     return   promise;
   }
 

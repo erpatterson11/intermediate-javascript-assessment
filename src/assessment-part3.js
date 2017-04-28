@@ -12,7 +12,15 @@
 // with the animal as the context, and 'Trogdor' as a parameter.
 // return the result of your updateAnimal invocation
 
-// CODE HERE...
+function callBinding(magicAnimals, updateAnimal, id) {
+  var matchingAnimal;
+  for (var i in magicAnimals) {
+      if (magicAnimals[i].id === id) {
+        matchingAnimal = magicAnimals[i];
+      }
+    }
+    return updateAnimal.call(magicAnimals, `Trogdor`)
+}
 
 
 // *************
@@ -26,7 +34,15 @@
 // with the context of the animal, and the array ['being majestic', 'eating rainbows'] as a parameter.
 // return the result of your updateAnimal invocation
 
-// CODE HERE...
+function applyBinding(magicAnimals, updateAnimal, id) {
+  var matchingAnimal;
+  for (var i in magicAnimals) {
+      if (magicAnimals[i].id === id) {
+        matchingAnimal = magicAnimals[i];
+      }
+    }
+    return updateAnimal.apply(matchingAnimal, ['being majestic', 'eating rainbows'])
+}
 
 // *************
 // * PROBLEM 3 *
@@ -43,7 +59,18 @@
 // NOTE: Manually invoking your function here will alter the 'foo' variable before tests run, causing them to fail.
 
 var foo;
-// CODE HERE...
+
+
+
+function promiseMe($q) {
+  var deferred = $q.defer();
+  setTimeout(function() {
+    deferred.resolve(function(){
+        foo = 'bar';
+        return foo;})
+  }, 20);
+  return deferred.promise.then(results => results());
+}
 
 
 // *************
@@ -58,4 +85,19 @@ var foo;
 // Make an array of emails (array of strings) from the returned data (You will need to console log or debug to figure this out),
 // and then pass the array as you complete your promise.
 
-// CODE HERE...
+function emailList($q,$http) {
+  var deferred = $q.defer();
+  let emailArr = [];
+
+  $http.get('/api/users').then(function(results) {
+    let data = results.data;
+    for (var i in data) {
+      emailArr.push(data[i].email)
+    }});
+
+    deferred.resolve(function() {
+      return emailArr;
+    })
+    
+  return deferred.promise.then(function(results){return results()});
+}
